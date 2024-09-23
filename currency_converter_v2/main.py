@@ -26,25 +26,29 @@ Instructions:
 Available currencies:
 """)
 
-original_currency = input("1. Enter the source currency: ").upper()
-if original_currency not in currencies:
-    print("Invalid source currency")
-    exit()
+while True:
+    original_currency = input("1. Enter the source currency: ").upper()
+    if original_currency in currencies:
+        break
+    else:
+        print("Invalid source currency. Please try again.")
 
-result_currency = input("2. Enter the target currency: ").upper()
-if result_currency not in currencies:
-    print("Invalid targer currency")
-    exit()
+while True:
+    result_currency = input("2. Enter the target currency: ").upper()
+    if result_currency in currencies:
+        break
+    else:
+        print("Invalid target currency. Please try again.")
 
-try:
-    original_amount = float(input("3. Enter the amount of source currency: "))
-except ValueError:
-    print("Invalid amount")
-    exit()
-
-# TODO: Handle errors (nonexistent currency + non-numeric amount)
-# TODO: Handle not only integers
-# NOTE: Consider handling negative numbers
+while True:
+    try:
+        original_amount = float(input("3. Enter the amount of source currency: "))
+        if original_amount < 0:
+            print("Amount cannot be negative. Please enter a positive value.")
+        else:
+            break
+    except ValueError:
+        print("Invalid amount. Please enter a numeric value.")
 
 result_amount = convert(
     original_currency, result_currency, original_amount, exchange_rates
